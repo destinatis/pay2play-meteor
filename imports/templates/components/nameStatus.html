@@ -1,0 +1,89 @@
+<template name="components_nameStatus">
+  {{#if searched}}
+    <div class="main-content col-md-8 {{#if TemplateVar.get 'loading'}}loading{{/if}}">
+      {{#if (TemplateVar.get 'error')}}
+        <h1>Error getting entry</h1>
+        <p>{{TemplateVar.get 'error'}}</p>
+      {{else}}
+        {{> Template.dynamic template=(TemplateVar.get 'status') data=(TemplateVar.get 'nameInfo')}}
+      {{/if}}
+    </div>
+    <aside class="col-md-4">
+        {{> Template.dynamic template=(TemplateVar.get 'aside') data=(TemplateVar.get 'nameInfo')}}
+        <!-- {{>view_names}} -->
+    </aside>
+  {{else}}
+    <div class="col-md-8 main-content">
+
+        <h1>Smart Wagers With Ethereum Blockchain</h1>
+
+        {{#unless isMainNetwork}}
+          <p class="network-warning">You are on the {{TemplateVar.get 'network'}} network. Transactions made here are not valid on the main net.</p>
+        {{/unless}}
+
+        <!-- {{> component_explainerBody}} -->
+
+
+        {{#unless hasNode}}
+          {{> components_noNode}}
+        {{/unless}}
+
+        <!-- {{#if hasAuctions}}
+        <br>
+        <h3> Knowns Auctions Started recently </h3>
+
+        Auctions are semi private: they are only seen by those who know the name. Some popular domains are therefore identifiable, but secret names are kept private until the owner decides to become public.
+
+        <ul class="names">
+          {{#each auction in publicAuctions}}
+              <li>
+                  <a href='#{{auction.name}}' class='{{#if auction.watched}}watched{{/if}} {{recent auction.registrationDate}}'>
+                    {{auction.fullname}}
+                  </a>
+              </li>
+            {{/each}}
+        </ul>
+
+          {{#if showExpiring}}
+          <br>
+          <h3> Last chance to bid! </h3>
+
+
+          <ul class="names">
+            {{#each auction in publicAuctionsAboutToExpire}}
+                <li>
+                    <a href='#{{auction.name}}' class='{{#if auction.watched}}watched{{/if}}'>
+                      {{auction.fullname}}
+                    </a>
+                </li>
+              {{/each}}
+          </ul>
+          {{/if}}
+        {{/if}} -->
+
+        <!-- <br>
+        {{#if namesRegistered}}
+        <h3> Knowns names recently registered </h3>
+
+        Before a name is granted, all names go to a week long wait to see if anyone else wants the name. If no other candidate appears, then the name is granted by locking 0.01 ether.
+        <ul class="names">
+          {{#each auction in knownNamesRegistered}}
+              <li>
+                  <a href='#{{auction.name}}' class='{{#if canBeInvalidated auction.name }}can-invalidate{{/if}} {{#if auction.watched}}watched{{/if}} {{recent auction.registrationDate}}'>
+                    {{auction.fullname}}
+                  </a>
+                    {{#if canBeInvalidated auction.name }}
+                    <icon class="icon-alert">!</icon>
+                    {{/if}}
+              </li>
+            {{/each}}
+        </ul>
+
+        {{/if}} -->
+
+    </div>
+    <aside class="col-md-4">
+        <!-- {{>view_names}} -->
+    </aside>
+  {{/if}}
+</template>

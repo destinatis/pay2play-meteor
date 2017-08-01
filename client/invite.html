@@ -1,0 +1,90 @@
+<template name="invite_template">
+  <div class="container">
+    {{#if showLoader}}
+      {{> dialog_loading}}
+    {{else}}
+      {{> dialog_invite}}
+    {{/if}}
+  </div>
+  {{> footer }}
+</template>
+
+<template name="dialog_invite">
+  <div class="dialog">
+    {{> header_regular }}
+    <br />
+    <h1>Wager Invite</h1>
+    <br />
+    <div>Wager Id: <a href="../wager/{{ index }}">{{ index }}</a></div>
+    <br />
+    <div>Start Time: {{ startTime }}</div>
+    <br />
+    <div>Amount: {{ amount }}</div>
+    <br />
+    <h1>Rules</h1>
+
+    <div>Swarm Hash: {{ rulesHash }} </div>
+    <br />
+    {{ #if rulesAcquired}}
+      <div style="background: #8a9a9a; color: white;">{{ rules.title }} within {{ rules.timeUntilEnd }} seconds.</div>
+    {{ else }}
+      <img src="/images/loader.gif" style="height: 2em; width: 2em;"/> <br />
+    {{ /if }}
+    <br />
+    {{> depositor_list_template }}
+    <br />
+
+    {{ # if equals wagerState 0 }}
+      {{ # if isAuthorized owner }}
+        <div class="status">Share this invite with your opponent or wait for someone to counter.</div>
+        <br />
+      {{ else }}
+        {{> counter_wager_template }}
+      {{ / if }}
+    {{ else }}
+      <button type="button" class="btn-primary" onclick="window.location.href='../wager/{{ index }}'">Review Wager</button><br />
+    {{ /if }}
+
+    <br />
+    <div><button type="button" class="btn-secondary" onclick="window.location.href='/'">Start Over</button></div>
+    <br />
+    {{ > wager_event_logs_template }}
+
+  </div>
+</template>
+
+<template name="depositor_list_template">
+  <h1>Players</h1>
+    {{ #each depositor in depositors }}
+      <!-- <input type="text" name="owner_{{@index}}" value="{{ owner }}" class="start-wager-form-address-input"><br /> -->
+      {{ # if isAuthorized depositor}}
+        <div class="spotlight">{{ depositor }} (You)</div>
+      {{ else }}
+        <div>{{ depositor }}</div>
+      {{ / if }}
+    {{ /each }}
+    <br />
+</template>
+
+<template name="counter_wager_template">
+  {{> error }}
+
+  <form class="counter-wager-form">
+    <br />
+    <div><input type="submit" value="Fund Wager"></div>
+  </form>
+</template>
+
+<template name="invite_event_logs_template">
+  <h1>Event Logs</h1>
+    {{ #each transaction in winningsWithdraw_Transactions }}
+      Withdrawal: <a href="{{ transaction.url }}">{{ transaction.txid }}</a><br />
+    {{ /each }}
+    {{ #each transaction in winnerSelected_Transactions }}
+      Winner Selected: <a href="{{ transaction.url }}">{{ transaction.txid }}</a><br />
+    {{ /each }}
+    {{ #each transaction in newDeposit_Transactions }}
+      New Deposit: <a href="{{ transaction.url }}">{{ transaction.txid }}</a><br />
+    {{ /each }}
+  <br />
+</template>

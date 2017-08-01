@@ -1,0 +1,69 @@
+<!-- START -->
+<template name="start">
+  <div class="container">
+    {{#if showLoader}}
+      {{> dialog_loading}}
+    {{else}}
+      {{> dialog_start}}
+    {{/if}}
+  </div>
+  {{ > footer }}
+</template>
+<!-- START -->
+
+<template name="load_values_template">
+    <button id="load-wagers">Load Wagers</button>
+</template>
+
+<template name="swarm_data_dropdown_template">
+  <select id="game-select">
+    <option disabled="disabled" selected="selected">Please Select</option>
+    {{#each games}}
+      <option value="{{ this.id }}">{{ this.rules.title }}</option>
+    {{/each}}
+  </select>
+</template>
+
+<template name="dialog_start">
+  <div class="dialog">
+    {{> header_regular }}
+    <br />
+
+    <div>What is your wager?</div>
+    <br />
+
+    {{ #if showWagerLoader }}
+      <img src="/images/loader.gif" style="height: 2em; width: 2em;"/> <br />
+    {{ else }}
+        {{ #if gamesAvailable }}
+          {{ > swarm_data_dropdown_template }} <br />
+
+          {{ #if selectedGame }}
+            <br />
+            <div>Rules Hash: {{ selectedGame.hash }}</div>
+            <div>Effective Duration: {{ selectedGame.rules.duration }} seconds</div>
+            <br />
+          {{ /if }}
+        {{ else }}
+          {{ > load_values_template }} <br />
+        {{ /if }}
+    {{ / if }}
+    <br />
+
+    {{ > start_wager_template }}
+    <br />
+    <div><button type="button" class="btn-secondary" onclick="window.location.href='/'">Home</button></div><br />
+
+    {{> error }}
+  </div>
+</template>
+
+<template name="start_wager_template">
+  <form class="start-wager-form">
+    <div>How much?</div>
+    <br />
+    <div><input type="text" name="amount" placeholder="Enter Amount" /></div>
+    <br />
+    <div><input type="submit" value="Start Wager"></div>
+  </form>
+</template>

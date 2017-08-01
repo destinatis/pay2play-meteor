@@ -1,0 +1,25 @@
+<template name="header_regular">
+    <div class="parentDiv">
+      {{> banner }}
+      {{> help_button }}
+    </div>
+</template>
+
+<template name="header_support">
+    <div class="parentDiv">
+      {{> banner }}
+      {{> close_button }}
+    </div>
+</template>
+
+<template name="banner">
+  <img src="/images/logo.png" class="banner" onclick="window.location.href='/'"/>
+</template>
+
+<template name="help_button">
+  <a class="btn support close" href="/support">?</a>
+</template>
+
+<template name="close_button">
+  <a class="btn support close" href="/">X</a>
+</template>

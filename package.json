@@ -1,0 +1,17 @@
+{
+  "name": "pay2play",
+  "version": "0.1.0",
+  "description": "Decentralized Wager Settlement System",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "author": "Konstantin Yurchenko, Jr.",
+  "license": "MIT",
+  "homepage": "",
+  "dependencies": {
+    "babel-runtime": "^6.23.0",
+    "ethereumjs-util": "^5.1.2",
+    "meteor-node-stubs": "~0.2.4"
+  }
+}

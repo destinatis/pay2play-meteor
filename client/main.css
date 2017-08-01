@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+/*
+  greenery 88b04b
+  online lime 548a4d
+  true blue 395181
+  directoire blue 046aaa
+  viridian green 00979c
+  blue radiance 62cbd5
+  goblin blue 5f7278
+  silver blue 8a9a9a
+  kalamata 5f5b4c
+  silt green a9bdb1
+  willow bough 59754d
+  calypso coral ec5d73
+
+  http://nebulon.s3.amazonaws.com/BPl0WYOZ.png
+*/
+body {
+    background-color: #ffffff;
+    color: #8a9a9a;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif !important;
+    text-align: center;
+}
+.footer {
+  padding: 32px;
+}
+
+.banner {
+    width: 512px;
+}
+.network-warning {
+  background: red;
+  color: #ffffff;
+}
+
+.dialog {
+  /*display: flex;*/
+  /*align-items: center;*/
+  margin:0 auto;
+  /*height: 1024px;*/
+  position: relative;
+  /*width: 768px;*/
+  width: 100%;
+}
+.close {
+  color: white;
+  position: absolute;
+  /*right: 6em;*/
+  text-decoration: none;
+  text-shadow: 0 1px 0 #fff;
+  top: 2em;
+}
+/* BUTTONS START */
+.btn {
+    display: block;
+    height: 2em;
+    width: 2em;
+    background: #046aaa;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 2em;
+    line-height: 2em;
+}
+.btn-primary {
+    background-color: #62cbd5;
+    color: white;
+    height: 5em;
+    width: 20em;
+    border: 0;
+    font-size: 1em;
+    font-family: 'Montserrat', sans-serif !important;
+}
+.btn-secondary {
+    background-color: #046aaa;
+    color: white;
+    height: 5em;
+    width: 20em;
+    border: 0;
+    font-size: 1em;
+    font-family: 'Montserrat', sans-serif !important;
+}
+/* BUTTONS ADD */
+#error-container {
+    display: none;
+    padding: 1em;
+}
+#error-message {
+    display: none;
+    background: red;
+    padding: 2em;
+    color: white;
+}
+
+input[type="submit"] {
+    /* change these properties to whatever you want */
+    background-color: #62cbd5;
+    color: #fff;
+    height: 5em;
+    width: 20em;
+    font-size: 1em;
+    border: 0;
+    font-family: 'Montserrat', sans-serif !important;
+}
+input[type="text"] {
+    margin: 0;
+    width: 10em;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 2em;
+    appearance: none;
+    box-shadow: none;
+    border-radius: none;
+}
+input[type="text"]:focus {
+  outline: none;
+}
+
+.start-wager-form-address-input {
+  width: 80% !important;
+  text-align: center;
+  font-size: 1em !important;
+  color: #046aaa;
+}
+
+.container {
+    text-align: center;
+}
+.highlighted {
+    color: white;
+    text-decoration: none;
+}
+.spotlight {
+  color: #548a4d;
+}
+.status {
+  background: #548a4d;
+  color: white;
+}
+
+a.menu-button:link {
+    /* change these properties to whatever you want */
+    background-color: #046aaa;
+    color: #fff;
+    height: 5em;
+    width: 20em;
+    border: 0;
+    font-family: 'Montserrat', sans-serif !important;
+    /*border-radius: 10px;*/
+}
+a.support:link {
+    color: white;
+    text-decoration: none;
+}
+a.support:visited {
+    color: white;
+    text-decoration: none;
+}
+a.support:hover {
+    color: white;
+    text-decoration: none;
+}
+a.general:link {
+    color: #046aaa;
+    text-decoration: underline;
+}
+a.general:visited {
+    color: #046aaa;
+    text-decoration: underline;
+}
+a.general:hover {
+    color: #046aaa;
+    text-decoration: underline;
+}

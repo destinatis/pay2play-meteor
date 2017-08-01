@@ -1,0 +1,100 @@
+<template name="wager_template">
+  <div class="container">
+    {{#if showLoader}}
+      {{> dialog_loading}}
+    {{else}}
+      {{> dialog_wager}}
+    {{/if}}
+  </div>
+  {{> footer }}
+</template>
+
+<template name="dialog_wager">
+  <div class="dialog">
+    {{> header_regular }}
+    <h1>Wager Ticket</h1>
+    <br />
+    <div>Wager Id: {{ index }}</div>
+    <br />
+    {{ # if equals wagerState 0 }}
+      <div class="status">open</div>
+    {{ / if }}
+    {{ # if equals wagerState 1 }}
+      <div class="status">closed</div>
+    {{ / if }}
+    {{ # if equals wagerState 2 }}
+      <div class="status">finished</div>
+    {{ / if }}
+    <br />
+    <div>Rules Hash: {{ rulesHash }}</div>
+    <br />
+    <div>Amount: {{ amount }}</div>
+    <br />
+
+    {{ # if equals wagerState 2 }}
+      {{ # if isAuthorized winner}}
+        Winner: <span class="spotlight">{{ winner }} (You)</span>
+      {{ else }}
+        Winner: <span>{{ winner }} (Not You)</span>
+      {{ / if }}
+    {{ else }}
+        Winner: <span>None announced yet</span>
+    {{ / if }}
+    <!-- <div>Winner: {{ TemplateVar.get 'winner' }}</div> -->
+    <br />
+    <br />
+    <div>Deposit Count: {{ count }}</div>
+    <br />
+
+    {{ # if isAuthorized winner}}
+      {{ # if winningsNotWithdrawn }}
+        {{ > withdraw_winnings_template }}
+        <br />
+      {{ / if }}
+    {{ / if }}
+
+    <div><button type="button" class="btn-secondary" onclick="window.location.href='/'">Start Over</button></div>
+    <br />
+    <h1>Related</h1>
+    <div>Invite Id: <a href="../invite/{{ index }}">{{ index }}</a></div>
+    <br />
+
+    {{ > wager_event_logs_template }}
+
+    {{ # if isAdmin}}
+      <h1>Admin</h1>
+      {{ > winner_selector_template }}
+    {{ / if }}
+  </div>
+</template>
+
+<template name="wager_event_logs_template">
+  <h1>Event Logs</h1>
+    {{ #each transaction in winningsWithdraw_Transactions }}
+      Withdrawal: <a href="{{ transaction.url }}">{{ transaction.txid }}</a><br />
+    {{ /each }}
+    {{ #each transaction in winnerSelected_Transactions }}
+      Winner Selected: <a href="{{ transaction.url }}">{{ transaction.txid }}</a><br />
+    {{ /each }}
+    {{ #each transaction in newDeposit_Transactions }}
+      New Deposit: <a href="{{ transaction.url }}">{{ transaction.txid }}</a><br />
+    {{ /each }}
+  <br />
+</template>
+
+<template name="withdraw_winnings_template">
+  <form class="withdraw-winnings-form">
+    <br />
+    <div><input type="submit" value="Withdraw Winnings"></div>
+  </form>
+</template>
+
+<template name="winner_selector_template">
+  <form class="winner-selector-form">
+    {{ #each owner in owners }}
+      <input type="text" name="owner_{{@index}}" value="{{ owner }}" class="start-wager-form-address-input"><br />
+    {{ /each }}
+    <br />
+    <div><input type="submit" value="Set Winner"></div>
+  </form>
+</template>

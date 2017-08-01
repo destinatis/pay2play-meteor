@@ -1,0 +1,16 @@
+<template name="wager_list">
+  <h1>Wager List </h1>
+  {{ #each wagers }}
+    {{ > component_wager }}
+  {{ /each }}
+</template>
+
+<template name="component_wager">
+  <!-- <div data-id="{{ _id }}"> -->
+  {{ #if equals state 'open' }}
+    <div style="background: #8a9a9a; color: white;"><a href="invite/{{ index }}">{{ index }}</a> | {{ state }} | {{ date }} | {{ amount }}</div>
+  {{ else }}
+    <div><a href="invite/{{ index }}">{{ index }}</a> | {{ state }} | {{ date }} | {{ amount }}</div>
+  {{ /if }}
+  <br />
+</template>
