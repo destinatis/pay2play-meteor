@@ -158,6 +158,8 @@ Template.swarm_data_dropdown_template.events({
 
         console.log(game);
 
+        game.rules["timeframe"] = moment.duration(game.rules.duration, "seconds").format("y [years], M [months], d [days], h [hours], m [minutes], s [seconds]");
+
         Session.set("selectedGame", game);
 
         hideErrorDialog();
@@ -214,6 +216,7 @@ Template.load_values_template.events({
 
       var url = '';
       url = "http://swrm.io/bzz:/" + hash + "/?list=true";
+      url = "http://swarm-gateways.net/bzz:/" + hash + "/?list=true";
       // url = "http://swarm-gateways.net/bzz:/" + hash + "/?list=true";
 
       // tar c 1.json 2.json | curl -H "Content-Type: application/x-tar" --data-binary @- http://localhost:8500/bzz:/
@@ -224,6 +227,7 @@ Template.load_values_template.events({
 
         var url = '';
         url = "http://swrm.io/bzzr:/" + game["hash"];
+        url = "http://swarm-gateways.net/bzzr:/" + game["hash"];
         // url = "http://swarm-gateways.net/bzzr:/" + game["hash"];
 
         console.log(url);

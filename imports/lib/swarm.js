@@ -1,6 +1,7 @@
 export function fetchSwarmFile(hash, callback) {
   var url = '';
   url = "http://swrm.io/bzzr:/" + hash;
+  url = "http://swarm-gateways.net/bzzr:/" + hash;
   // url = "http://swarm-gateways.net/bzzr:/" + game["hash"];
 
   console.log(url);

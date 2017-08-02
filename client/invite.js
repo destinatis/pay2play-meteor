@@ -9,8 +9,6 @@ import { network, registrar, registrarAddress } from '/imports/lib/ethereum';
 
 import { fetchSwarmFile } from '/imports/lib/swarm';
 
-// import moment from 'moment-duration-format';
-
 // HELPERS
 Template.registerHelper("equals", function (a, b) {
   return (a == b);
@@ -226,15 +224,9 @@ function sync(address, index, callback) {
   // SYNC TRANSACTIONS
 }
 
-var template;
-
 Template.dialog_invite.onRendered(function() {
 
-  // console.log("MOMENT: " + moment.duration(123, "minutes").format("y [years], M [months], d [days], h [hours], m [minutes], s [seconds]"));
-
   Session.set('showLoader', false);
-
-  template = this;
 
   var index = Router.current().params._id;
   var authorizedAccount;
@@ -298,9 +290,7 @@ Template.dialog_invite.onRendered(function() {
         Session.set('wagerState', result[0].toString());
 
         var startedAt = result[1];
-
         var date = new Date(startedAt * 1000);
-
         Session.set('startTime', date)
 
         Session.set('index', index);
@@ -309,10 +299,10 @@ Template.dialog_invite.onRendered(function() {
         Session.set('depositors', result[4]);
         Session.set('owner', result[4][0]);
 
+        // fetchSwarmFile START
         var rulesHash = result[5].replace('0x', '');
         Session.set('rulesHash', rulesHash);
 
-        // fetchSwarmFile START
         web3.eth.getBlock('latest', function(err, block) {
           console.log(block);
 
@@ -332,7 +322,6 @@ Template.dialog_invite.onRendered(function() {
           }
 
           fetchSwarmFile(rulesHash, parse);
-          // fetchSwarmFile END
         });
         // fetchSwarmFile END
       });

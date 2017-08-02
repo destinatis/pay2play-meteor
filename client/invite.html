@@ -21,8 +21,9 @@
     <br />
     <div>Amount: {{ amount }}</div>
     <br />
-    <h1>Rules</h1>
 
+    <!-- RULES -->
+    <h1>Rules</h1>
     <div>Swarm Hash: {{ rulesHash }} </div>
     <br />
     {{ #if rulesAcquired}}
@@ -31,6 +32,8 @@
       <img src="/images/loader.gif" style="height: 2em; width: 2em;"/> <br />
     {{ /if }}
     <br />
+    <!-- RULES -->
+
     {{> depositor_list_template }}
     <br />
 

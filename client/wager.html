@@ -16,6 +16,8 @@
     <br />
     <div>Wager Id: {{ index }}</div>
     <br />
+    <div>Start Time: {{ startTime }}</div>
+    <br />
     {{ # if equals wagerState 0 }}
       <div class="status">open</div>
     {{ / if }}
@@ -26,10 +28,20 @@
       <div class="status">finished</div>
     {{ / if }}
     <br />
-    <div>Rules Hash: {{ rulesHash }}</div>
-    <br />
     <div>Amount: {{ amount }}</div>
     <br />
+
+    <!-- RULES -->
+    <h1>Rules</h1>
+    <div>Swarm Hash: {{ rulesHash }} </div>
+    <br />
+    {{ #if rulesAcquired}}
+      <div style="background: #8a9a9a; color: white;">{{ rules.title }} within {{ rules.timeUntilEnd }} seconds.</div>
+    {{ else }}
+      <img src="/images/loader.gif" style="height: 2em; width: 2em;"/> <br />
+    {{ /if }}
+    <br />
+    <!-- RULES -->
 
     {{ # if equals wagerState 2 }}
       {{ # if isAuthorized winner}}

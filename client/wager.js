@@ -7,6 +7,8 @@ import Helpers from '/imports/lib/helpers/helperFunctions';
 
 import { network, registrar, registrarAddress } from '/imports/lib/ethereum';
 
+import { fetchSwarmFile } from '/imports/lib/swarm';
+
 // HELPERS
 Template.registerHelper("equals", function (a, b) {
   return (a == b);
@@ -56,6 +58,15 @@ Template.dialog_wager.helpers({
   },
   rulesHash() {
     return Session.get('rulesHash');
+  },
+  rulesAcquired() {
+    return Session.get('rulesAcquired');
+  },
+  rules() {
+    return Session.get('rules');
+  },
+  startTime() {
+    return Session.get('startTime');
   }
 });
 Template.winner_selector_template.helpers({
@@ -239,10 +250,7 @@ function pullEventLog(address, index, key, callback) {
   });
 }
 
-var template;
-
 Template.dialog_wager.onRendered(function() {
-  template = this;
   var index = Router.current().params._id;
 
   // web3.eth.getBalance(accounts[0], function(e, balance) {
@@ -325,6 +333,10 @@ Template.dialog_wager.onRendered(function() {
 
         Session.set('wagerState', state);
 
+        var startedAt = result[1];
+        var date = new Date(startedAt * 1000);
+        Session.set('startTime', date)
+
         Session.set('index', index);
 
         Session.set('amount', result[2].toString());
@@ -335,10 +347,33 @@ Template.dialog_wager.onRendered(function() {
 
         Session.set('owners', result[4]);
 
-        Session.set('rulesHash', result[5].replace('0x', ''));
-
         Session.set("registrarOwner", registrar.node);
 
+        // fetchSwarmFile START
+        var rulesHash = result[5].replace('0x', '');
+        Session.set('rulesHash', rulesHash);
+
+        web3.eth.getBlock('latest', function(err, block) {
+          console.log(block);
+
+          function parse(result) {
+            console.log("parse", result);
+
+            Session.set("rulesAcquired", true);
+
+            var timeUntilEnd = result.duration - (block.timestamp - startedAt);
+
+            var rules = {
+              title: result.title.replace(".", ""),
+              timeUntilEnd: moment.duration(timeUntilEnd, "seconds").format("y [years], M [months], d [days], h [hours], m [minutes], s [seconds]")
+            };
+
+            Session.set("rules", rules);
+          }
+
+          fetchSwarmFile(rulesHash, parse);
+        });
+        // fetchSwarmFile END
       });
     }
   });

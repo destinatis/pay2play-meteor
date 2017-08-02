@@ -12,7 +12,7 @@
 <!-- START -->
 
 <template name="load_values_template">
-    <button id="load-wagers">Load Wagers</button>
+    <button id="load-wagers">Load Rules</button>
 </template>
 
 <template name="swarm_data_dropdown_template">
@@ -40,8 +40,8 @@
 
           {{ #if selectedGame }}
             <br />
-            <div>Rules Hash: {{ selectedGame.hash }}</div>
-            <div>Effective Duration: {{ selectedGame.rules.duration }} seconds</div>
+            <div>Swarm Hash: {{ selectedGame.hash }}</div>
+            <div>Effective Timeframe: {{ selectedGame.rules.timeframe }} seconds</div>
             <br />
           {{ /if }}
         {{ else }}
